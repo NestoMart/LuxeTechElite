@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeTech Elite - Premium Products & Electronics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(0, 0, 0, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            transform: translateY(-2px);
+        }
+
+        .menu-toggle {
+            display: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section with Background */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.6)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"><defs><linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23667eea;stop-opacity:0.3" /><stop offset="50%" style="stop-color:%23764ba2;stop-opacity:0.2" /><stop offset="100%" style="stop-color:%23f093fb;stop-opacity:0.3" /></linearGradient><radialGradient id="bg2" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:%23ff6b6b;stop-opacity:0.2" /><stop offset="100%" style="stop-color:%234ecdc4;stop-opacity:0.1" /></radialGradient></defs><rect width="1920" height="1080" fill="%23000"/><rect width="1920" height="1080" fill="url(%23bg1)"/><circle cx="300" cy="200" r="150" fill="url(%23bg2)"/><circle cx="1600" cy="300" r="200" fill="rgba(255,255,255,0.05)"/><circle cx="800" cy="800" r="120" fill="rgba(78,205,196,0.1)"/><polygon points="1200,100 1300,200 1100,250" fill="rgba(255,107,107,0.1)"/><polygon points="400,700 500,800 300,850" fill="rgba(255,255,255,0.08)"/></svg>') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: -350px;
+            top: 0;
+            width: 350px;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 999;
+            padding: 5rem 2rem 2rem;
+            transition: all 0.3s ease;
+            border-right: 2px solid rgba(255, 107, 107, 0.3);
+            overflow-y: auto;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar h3 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            text-align: center;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .category-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .category-list li {
+            margin-bottom: 0.8rem;
+        }
+
+        .category-list a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            padding: 1rem 1.2rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .category-list a:hover {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: #fff;
+            transform: translateX(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        /* Sidebar Sections */
+        .sidebar-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-section:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-links {
+            list-style: none;
+        }
+
+        .sidebar-links li {
+            margin-bottom: 0.6rem;
+        }
+
+        .sidebar-links a {
+            color: #bbb;
+            text-decoration: none;
+            display: block;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-links a:hover {
+            background: rgba(255, 107, 107, 0.2);
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 50%;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 100vh;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Product Grid */
+        .product-scroll {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 1rem 0;
+            scroll-behavior: smooth;
+        }
+
+        .product-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .product-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .product-scroll::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 10px;
+        }
+
+        .product-card {
+            min-width: 300px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-rating {
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .buy-button {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .buy-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Categories Grid */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .category-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            color: #fff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+            color: #fff;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #ff6b6b);
+            background-size: 200% 100%;
+            animation: gradientMove 3s ease-in-out infinite;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-section p, .footer-section li {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ff6b6b;
+            transform: translateX(5px);
+        }
+
+        .affiliate-disclaimer {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .affiliate-disclaimer h4 {
+            color: #ff6b6b;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #999;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .main-content {
+                padding: 2rem 1rem;
+            }
+
+            .product-card {
+                min-width: 250px;
+            }
+        }
+
+        /* Sticky Scroll Effect */
+        .parallax {
+            position: relative;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">LuxeTech Elite</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#top-sellers">Top Sellers</a></li>
+                <li><a href="#new-arrivals">New Arrivals</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" onclick="toggleSidebar()">☰</div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-section">
+            <h3>Categories</h3>
+            <ul class="category-list">
+                <li><a href="#luxury-watches">⌚ Luxury Watches</a></li>
+                <li><a href="#premium-headphones">🎧 Premium Audio</a></li>
+                <li><a href="#smart-devices">📱 Smart Devices</a></li>
+                <li><a href="#luxury-accessories">💎 Luxury Accessories</a></li>
+                <li><a href="#top-sellers">🔥 Top Sellers</a></li>
+                <li><a href="#new-arrivals">✨ New Arrivals</a></li>
+            </ul>
+        </div>
+
+        <div class="sidebar-section">
+            <h3>Quick Links</h3>
+            <ul class="sidebar-links">
+                <li><a href="#home">🏠 Home</a></li>
+                <li><a href="#categories">📂 All Categories</a></li>
+                <li><a href="#" onclick="openContact()">📧 Contact Us</a></li>
+                <li><a href="#footer">ℹ️ About Us</a></li>
+            </ul>
+        </div>
+
+        <div class="sidebar-section">
+            <h3>Customer Service</h3>
+            <ul class="sidebar-links">
+                <li><a href="#" onclick="openContact()">🎧 Support</a></li>
+                <li><a href="#footer">📋 Affiliate Disclosure</a></li>
+                <li><a href="#footer">🔒 Privacy Policy</a></li>
+                <li><a href="#footer">📜 Terms of Service</a></li>
+            </ul>
+        </div>
+
+        <div class="sidebar-section">
+            <h3>Follow Us</h3>
+            <div class="social-links">
+                <a href="#" title="Facebook">📘</a>
+                <a href="#" title="Twitter">🐦</a>
+                <a href="#" title="Instagram">📸</a>
+                <a href="#" title="YouTube">📺</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero parallax" id="home">
+        <div class="hero-content">
+            <h1>Discover Premium Excellence</h1>
+            <p>Curated luxury items and cutting-edge electronics from Amazon</p>
+            <a href="#categories" class="cta-button">Explore Products</a>
+        </div>
+    </section>
+
+            <!-- Main Content -->
+    <div class="main-content">
+        <!-- Categories Section -->
+        <section class="section" id="categories">
+            <h2>Shop by Categories</h2>
+            <div class="categories-grid">
+                <div class="category-card" onclick="scrollToSection('luxury-watches')">
+                    <div class="category-icon">⌚</div>
+                    <div class="category-name">Luxury Watches</div>
+                </div>
+                <div class="category-card" onclick="scrollToSection('premium-headphones')">
+                    <div class="category-icon">🎧</div>
+                    <div class="category-name">Premium Audio</div>
+                </div>
+                <div class="category-card" onclick="scrollToSection('smart-devices')">
+                    <div class="category-icon">📱</div>
+                    <div class="category-name">Smart Devices</div>
+                </div>
+                <div class="category-card" onclick="scrollToSection('luxury-accessories')">
+                    <div class="category-icon">💎</div>
+                    <div class="category-name">Luxury Accessories</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Luxury Watches Section -->
+        <section class="section" id="luxury-watches">
+            <h2>⌚ Luxury Watches</h2>
+            <div class="product-scroll">
+                <div class="product-card">
+                    <div class="product-image"><img src="https://m.media-amazon.com/images/I/71nsOv4pzQS._AC_SY445_.jpg" alt=""></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Rado Blue Watch Captain Cook High Tech Ceramic Automatic Swiss Movement, 43 mm. R32128202</h3>
+                        <div class="product-price">$4,300</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.3)</div>
+                        <p class="product-description">Beautiful, Resistant Watch Strap Made of: Plasma high-tech ceramic, Titanium, Ceramos</p>
+                        <button class="buy-button" onclick="buyProduct('Rolex Submariner')">Buy on Amazon</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image"><img src="https://m.media-amazon.com/images/I/81J44XW1ZRL._AC_SX466_.jpg" alt=""></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Citizen Eco-Drive Pilot Chronograph Watch with Atomic Timekeeping, 12/24HR, Power Reserve, Luminous Hands/Markers, Sapphire Crystal - Green Dial</h3>
+                        <div class="product-price">$499</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.5)</div>
+                        <p class="product-description">Modern, pilot-inspired Promaster timepieces equipped for professional use to discover the world from high above.</p>
+                        <button class="buy-button" onclick="buyProduct('Omega Speedmaster')">Buy on Amazon</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image"><img src="https://m.media-amazon.com/images/I/71l2pSLyWRL._AC_SX466_.jpg" alt=""></div>
+                    <div class="product-info">
+                        <h3 class="product-title">Apple Watch Ultra 2</h3>
+                        <div class="product-price">$779</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.7)</div>
+                        <p class="product-description">THE FREEDOM OF CELLULAR — With a cellular service plan you can call and text without your iPhone nearby.* Stream your favorite music and podcasts. Get directions with Maps.</p>
+                        <button class="buy-button" onclick="buyProduct('TAG Heuer Formula 1')">Buy on Amazon</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Premium Audio Section -->
+        <section class="section" id="premium-headphones">
+            <h2>🎧 Premium Audio</h2>
+            <div class="product-scroll">
+                <div class="product-card">
+                    <div class="product-image">🎧</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Sony WH-1000XM5</h3>
+                        <div class="product-price">$399.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.7)</div>
+                        <p class="product-description">Industry-leading noise canceling wireless headphones with premium sound.</p>
+                        <button class="buy-button" onclick="buyProduct('Sony WH-1000XM5')">Buy on Amazon</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🎧</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Bose QuietComfort 45</h3>
+                        <div class="product-price">$329.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.6)</div>
+                        <p class="product-description">Legendary comfort meets advanced noise cancellation technology.</p>
+                        <button class="buy-button" onclick="buyProduct('Bose QuietComfort 45')">Buy on Amazon</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">🎧</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Sennheiser HD 800 S</h3>
+                        <div class="product-price">$1,699.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.8)</div>
+                        <p class="product-description">Reference-class open-back headphones for audiophiles.</p>
+                        <button class="buy-button" onclick="buyProduct('Sennheiser HD 800 S')">Buy on Amazon</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Smart Devices Section -->
+        <section class="section" id="smart-devices">
+            <h2>📱 Smart Devices</h2>
+            <div class="product-scroll">
+                <div class="product-card">
+                    <div class="product-image">📱</div>
+                    <div class="product-info">
+                        <h3 class="product-title">iPhone 15 Pro Max</h3>
+                        <div class="product-price">$1,199.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.8)</div>
+                        <p class="product-description">Latest flagship smartphone with titanium design and advanced camera system.</p>
+                        <button class="buy-button" onclick="buyProduct('iPhone 15 Pro Max')">Buy on Amazon</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">📱</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Samsung Galaxy S24 Ultra</h3>
+                        <div class="product-price">$1,299.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.7)</div>
+                        <p class="product-description">AI-powered smartphone with S Pen and 200MP camera.</p>
+                        <button class="buy-button" onclick="buyProduct('Samsung Galaxy S24 Ultra')">Buy on Amazon</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">💻</div>
+                    <div class="product-info">
+                        <h3 class="product-title">iPad Pro 12.9"</h3>
+                        <div class="product-price">$1,099.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.6)</div>
+                        <p class="product-description">Professional tablet with M2 chip and Liquid Retina XDR display.</p>
+                        <button class="buy-button" onclick="buyProduct('iPad Pro 12.9')">Buy on Amazon</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Luxury Accessories Section -->
+        <section class="section" id="luxury-accessories">
+            <h2>💎 Luxury Accessories</h2>
+            <div class="product-scroll">
+                <div class="product-card">
+                    <div class="product-image">💎</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Louis Vuitton Wallet</h3>
+                        <div class="product-price">$465.00</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.9)</div>
+                        <p class="product-description">Iconic monogram canvas wallet with premium leather finish.</p>
+                        <button class="buy-button" onclick="buyProduct('Louis Vuitton Wallet')">Buy on Amazon</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">💎</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Hermès Silk Scarf</h3>
+                        <div class="product-price">$425.00</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.8)</div>
+                        <p class="product-description">Luxurious 100% silk twill scarf with exclusive design.</p>
+                        <button class="buy-button" onclick="buyProduct('Hermès Silk Scarf')">Buy on Amazon</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">💎</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Montblanc Pen</h3>
+                        <div class="product-price">$320.00</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.7)</div>
+                        <p class="product-description">Precision crafted fountain pen with gold-plated nib.</p>
+                        <button class="buy-button" onclick="buyProduct('Montblanc Pen')">Buy on Amazon</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Sellers Section -->
+        <section class="section" id="top-sellers">
+            <h2>🔥 Top Sellers</h2>
+            <div class="product-scroll">
+                <div class="product-card">
+                    <div class="product-image">📱</div>
+                    <div class="product-info">
+                        <h3 class="product-title">iPhone 15 Pro Max</h3>
+                        <div class="product-price">$1,199.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.8)</div>
+                        <p class="product-description">Latest flagship smartphone with titanium design and advanced camera system.</p>
+                        <button class="buy-button" onclick="buyProduct('iPhone 15 Pro Max')">Buy on Amazon</button>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">⌚</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Rolex Submariner</h3>
+                        <div class="product-price">$8,999.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.9)</div>
+                        <p class="product-description">Iconic luxury diving watch with exceptional craftsmanship.</p>
+                        <button class="buy-button" onclick="buyProduct('Rolex Submariner')">Buy on Amazon</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🎧</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Sony WH-1000XM5</h3>
+                        <div class="product-price">$399.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.7)</div>
+                        <p class="product-description">Industry-leading noise canceling wireless headphones.</p>
+                        <button class="buy-button" onclick="buyProduct('Sony WH-1000XM5')">Buy on Amazon</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">💻</div>
+                    <div class="product-info">
+                        <h3 class="product-title">MacBook Pro 16"</h3>
+                        <div class="product-price">$2,499.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.8)</div>
+                        <p class="product-description">Powerful laptop for professionals with M3 Max chip.</p>
+                        <button class="buy-button" onclick="buyProduct('MacBook Pro 16')">Buy on Amazon</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🎮</div>
+                    <div class="product-info">
+                        <h3 class="product-title">PlayStation 5 Pro</h3>
+                        <div class="product-price">$699.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.6)</div>
+                        <p class="product-description">Next-gen gaming console with enhanced performance.</p>
+                        <button class="buy-button" onclick="buyProduct('PlayStation 5 Pro')">Buy on Amazon</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Arrivals Section -->
+        <section class="section" id="new-arrivals">
+            <h2>✨ New Arrivals</h2>
+            <div class="product-scroll">
+                <div class="product-card">
+                    <div class="product-image">🥽</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Apple Vision Pro</h3>
+                        <div class="product-price">$3,499.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.5)</div>
+                        <p class="product-description">Revolutionary spatial computing device for the future.</p>
+                        <button class="buy-button" onclick="buyProduct('Apple Vision Pro')">Buy on Amazon</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">🎧</div>
+                    <div class="product-info">
+                        <h3 class="product-title">AirPods Max</h3>
+                        <div class="product-price">$549.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.4)</div>
+                        <p class="product-description">Premium over-ear headphones with spatial audio.</p>
+                        <button class="buy-button" onclick="buyProduct('AirPods Max')">Buy on Amazon</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">📸</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Canon EOS R5</h3>
+                        <div class="product-price">$3,899.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.7)</div>
+                        <p class="product-description">Professional mirrorless camera with 8K video recording.</p>
+                        <button class="buy-button" onclick="buyProduct('Canon EOS R5')">Buy on Amazon</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">⌚</div>
+                    <div class="product-info">
+                        <h3 class="product-title">Apple Watch Ultra 2</h3>
+                        <div class="product-price">$799.99</div>
+                        <div class="product-rating">⭐⭐⭐⭐⭐ (4.6)</div>
+                        <p class="product-description">Most capable Apple Watch designed for extreme adventures.</p>
+                        <button class="buy-button" onclick="buyProduct('Apple Watch Ultra 2')">Buy on Amazon</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About LuxeTech Elite</h3>
+                <p>We curate the finest luxury items and cutting-edge electronics from Amazon, bringing you premium quality products with the convenience of trusted marketplace shopping.</p>
+                <div class="affiliate-disclaimer">
+                    <h4>Amazon Affiliate Disclosure</h4>
+                    <p><strong>LuxeTech Elite</strong> is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com. As an Amazon Associate, we earn from qualifying purchases at no additional cost to you.</p>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#categories">All Categories</a></li>
+                    <li><a href="#top-sellers">Best Sellers</a></li>
+                    <li><a href="#new-arrivals">New Arrivals</a></li>
+                    <li><a href="#luxury-watches">Luxury Watches</a></li>
+                    <li><a href="#premium-headphones">Premium Audio</a></li>
+                    <li><a href="#smart-devices">Smart Devices</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Customer Service</h3>
+                <ul>
+                    <li><a href="#" onclick="openContact()">Contact Support</a></li>
+                    <li><a href="#" onclick="showShippingInfo()">Shipping Information</a></li>
+                    <li><a href="#" onclick="showReturnPolicy()">Return Policy</a></li>
+                    <li><a href="#" onclick="showFAQ()">FAQ</a></li>
+                    <li><a href="#" onclick="showWarrantyInfo()">Product Reviews</a></li>
+                    <li><a href="#" onclick="showWarrantyInfo()">Warranty Information</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Legal & Policies</h3>
+                <ul>
+                    <li><a href="#" onclick="showPrivacyPolicy()">Privacy Policy</a></li>
+                    <li><a href="#" onclick="showTermsOfService()">Terms of Service</a></li>
+                    <li><a href="#" onclick="showCookiePolicy()">Cookie Policy</a></li>
+                    <li><a href="#footer">Affiliate Disclosure</a></li>
+                    <li><a href="#" onclick="showDMCAPolicy()">DMCA Policy</a></li>
+                </ul>
+                <div style="margin-top: 1rem;">
+                    <p><strong>Disclaimer:</strong> Prices and availability are subject to change. Product images are for illustration purposes only. All product names, logos, and brands are property of their respective owners.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 LuxeTech Elite. All rights reserved. | Proudly serving premium product enthusiasts worldwide | Amazon Associate Program Participant</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll to section function
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // Contact function
+        function openContact() {
+            window.open('https://amzn.to/3UjyWO1', '_blank');
+        }
+
+        // Buy Product function (simulates affiliate link)
+        function buyProduct(productName) {
+            // In a real implementation, this would redirect to your Amazon affiliate link
+            alert(`Redirecting to Amazon for: ${productName}\n\nIn production, this would be your affiliate link!`);
+            
+            // Example of how you'd implement the actual redirect:
+            // window.open('https://amazon.com/dp/YOUR-AFFILIATE-LINK', '_blank');
+        }
+
+        // Footer functionality
+        function showShippingInfo() {
+            showModal('Shipping Information', `
+                <div style="text-align: left;">
+                    <h4>🚚 Shipping Policy</h4>
+                    <p><strong>Note:</strong> All products are sold and shipped by Amazon.</p>
+                    <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                        <li>✅ Free shipping on orders over $25</li>
+                        <li>📦 Prime members get FREE same-day, one-day, or two-day delivery</li>
+                        <li>🌍 International shipping available to select countries</li>
+                        <li>📍 Delivery times vary by location and product availability</li>
+                        <li>📧 Tracking information provided via email</li>
+                    </ul>
+                    <p><em>For specific shipping options and costs, please check the product page on Amazon.</em></p>
+                </div>
+            `);
+        }
+
+        function showReturnPolicy() {
+            showModal('Return Policy', `
+                <div style="text-align: left;">
+                    <h4>↩️ Amazon Return Policy</h4>
+                    <p><strong>All returns are handled directly by Amazon:</strong></p>
+                    <ul style="margin: 1rem 0; padding-left: 1.5rem;">
+                        <li>📅 Most items can be returned within 30 days</li>
+                        <li>💍 Jewelry and watches: 30-day return window</li>
+                        <li>📱 Electronics: Check specific return policy on product page</li>
+                        <li>💰 Full refund when returned in original condition</li>
+                        <li>📦 Easy return process through Amazon account</li>
+                    </ul>
+                    <p><strong>To initiate a return:</strong> Log into your Amazon account, go to "Your Orders," and select "Return or replace items."</p>
+                </div>
+            `);
+        }
+
+        function showFAQ() {
+            showModal('Frequently Asked Questions', `
+                <div style="text-align: left;">
+                    <h4>❓ Common Questions</h4>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Q: Are these genuine products?</strong><br>
+                        <span style="color: #666;">A: Yes! All products are sold by Amazon or authorized sellers, ensuring authenticity.</span>
+                    </div>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Q: How do I track my order?</strong><br>
+                        <span style="color: #666;">A: Once you place an order on Amazon, you'll receive tracking information via email.</span>
+                    </div>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Q: What payment methods are accepted?</strong><br>
+                        <span style="color: #666;">A: Amazon accepts all major credit cards, debit cards, Amazon Pay, and gift cards.</span>
+                    </div>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Q: Are prices subject to change?</strong><br>
+                        <span style="color: #666;">A: Yes, Amazon prices can fluctuate. Final price is confirmed at checkout.</span>
+                    </div>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Q: Do you offer customer support?</strong><br>
+                        <span style="color: #666;">A: For product inquiries, use our contact link. For order support, contact Amazon directly.</span>
+                    </div>
+                </div>
+            `);
+        }
+
+        function showWarrantyInfo() {
+            showModal('Warranty Information', `
+                <div style="text-align: left;">
+                    <h4>🛡️ Product Warranties</h4>
+                    <p><strong>Warranty coverage varies by manufacturer:</strong></p>
+                    
+                    <div style="margin: 1rem 0; padding: 1rem; background: rgba(255,107,107,0.1); border-radius: 10px;">
+                        <strong>⌚ Luxury Watches:</strong><br>
+                        <span style="color: #666;">• Rolex: 5-year international warranty<br>
+                        • Omega: 5-year Master Chronometer warranty<br>
+                        • TAG Heuer: 2-year international warranty</span>
+                    </div>
+                    
+                    <div style="margin: 1rem 0; padding: 1rem; background: rgba(78,205,196,0.1); border-radius: 10px;">
+                        <strong>📱 Electronics:</strong><br>
+                        <span style="color: #666;">• Apple products: 1-year limited warranty + AppleCare options<br>
+                        • Samsung: 1-year manufacturer warranty<br>
+                        • Sony: 1-year limited warranty</span>
+                    </div>
+                    
+                    <p><em>For warranty claims, contact the manufacturer directly or check Amazon's warranty service.</em></p>
+                </div>
+            `);
+        }
+
+        function showPrivacyPolicy() {
+            showModal('Privacy Policy', `
+                <div style="text-align: left;">
+                    <h4>🔒 Privacy Policy</h4>
+                    <p><strong>Your privacy is important to us. Here's how we handle your information:</strong></p>
+                    
+                    <div style="margin: 1rem 0;">
+                        <strong>Information We Collect:</strong><br>
+                        <span style="color: #666;">• We do not collect personal information directly<br>
+                        • Amazon handles all transaction and personal data<br>
+                        • We may use cookies for site functionality</span>
+                    </div>
+                    
+                    <div style="margin: 1rem 0;">
+                        <strong>How We Use Information:</strong><br>
+                        <span style="color: #666;">• To improve our product recommendations<br>
+                        • To analyze site traffic and user behavior<br>
+                        • To comply with legal obligations</span>
+                    </div>
+                    
+                    <div style="margin: 1rem 0;">
+                        <strong>Third-Party Services:</strong><br>
+                        <span style="color: #666;">• Amazon processes all purchases and payments<br>
+                        • Google Analytics may track anonymous usage data<br>
+                        • Social media platforms may collect interaction data</span>
+                    </div>
+                    
+                    <p><em>For questions about this policy, please contact us through our contact page.</em></p>
+                </div>
+            `);
+        }
+
+        function showTermsOfService() {
+            showModal('Terms of Service', `
+                <div style="text-align: left;">
+                    <h4>📜 Terms of Service</h4>
+                    <p><strong>By using LuxeTech Elite, you agree to these terms:</strong></p>
+                    
+                    <div style="margin: 1rem 0;">
+                        <strong>🛍️ Shopping Terms:</strong><br>
+                        <span style="color: #666;">• All purchases are made directly through Amazon<br>
+                        • Amazon's terms and conditions apply to all transactions<br>
+                        • We are not responsible for product availability or pricing</span>
+                    </div>
+                    
+                    <div style="margin: 1rem 0;">
+                        <strong>💰 Affiliate Relationship:</strong><br>
+                        <span style="color: #666;">• We earn commissions from qualifying Amazon purchases<br>
+                        • This does not affect the price you pay<br>
+                        • Product recommendations are based on quality and popularity</span>
+                    </div>
+                    
+                    <div style="margin: 1rem 0;">
+                        <strong>🚫 Prohibited Uses:</strong><br>
+                        <span style="color: #666;">• No unauthorized commercial use of our content<br>
+                        • No attempts to bypass our affiliate links<br>
+                        • No fraudulent or illegal activities</span>
+                    </div>
+                    
+                    <p><em>These terms are subject to change. Continued use constitutes acceptance of any modifications.</em></p>
+                </div>
+            `);
+        }
+
+        function showCookiePolicy() {
+            showModal('Cookie Policy', `
+                <div style="text-align: left;">
+                    <h4>🍪 Cookie Policy</h4>
+                    <p><strong>We use cookies to enhance your browsing experience:</strong></p>
+                    
+                    <div style="margin: 1rem 0; padding: 1rem; background: rgba(255,107,107,0.1); border-radius: 10px;">
+                        <strong>Essential Cookies:</strong><br>
+                        <span style="color: #666;">• Required for basic site functionality<br>
+                        • Remember your preferences and settings<br>
+                        • Cannot be disabled</span>
+                    </div>
+                    
+                    <div style="margin: 1rem 0; padding: 1rem; background: rgba(78,205,196,0.1); border-radius: 10px;">
+                        <strong>Analytics Cookies:</strong><br>
+                        <span style="color: #666;">• Help us understand how visitors use our site<br>
+                        • Collect anonymous usage statistics<br>
+                        • Used to improve our services</span>
+                    </div>
+                    
+                    <div style="margin: 1rem 0; padding: 1rem; background: rgba(69,183,209,0.1); border-radius: 10px;">
+                        <strong>Marketing Cookies:</strong><br>
+                        <span style="color: #666;">• Track your Amazon affiliate clicks<br>
+                        • Enable proper commission attribution<br>
+                        • Required for our affiliate program participation</span>
+                    </div>
+                    
+                    <p><em>You can manage cookie preferences through your browser settings.</em></p>
+                </div>
+            `);
+        }
+
+        function showDMCAPolicy() {
+            showModal('DMCA Policy', `
+                <div style="text-align: left;">
+                    <h4>⚖️ DMCA Policy</h4>
+                    <p><strong>LuxeTech Elite respects intellectual property rights:</strong></p>
+                    
+                    <div style="margin: 1rem 0;">
+                        <strong>Copyright Notice:</strong><br>
+                        <span style="color: #666;">• All product images are used under fair use or with permission<br>
+                        • Product descriptions are original or sourced from Amazon<br>
+                        • We respect all trademark and copyright holders</span>
+                    </div>
+                    
+                    <div style="margin: 1rem 0;">
+                        <strong>Filing a DMCA Complaint:</strong><br>
+                        <span style="color: #666;">If you believe your copyrighted work has been used improperly:<br>
+                        1. Contact us through our contact page<br>
+                        2. Provide proof of copyright ownership<br>
+                        3. Specify the infringing content<br>
+                        4. Include your contact information</span>
+                    </div>
+                    
+                    <div style="margin: 1rem 0;">
+                        <strong>Response Time:</strong><br>
+                        <span style="color: #666;">• We will respond to valid DMCA requests within 48 hours<br>
+                        • Infringing content will be removed promptly<br>
+                        • Counter-notifications are handled per DMCA guidelines</span>
+                    </div>
+                </div>
+            `);
+        }
+
+        // Modal system for displaying information
+        function showModal(title, content) {
+            // Remove existing modal if any
+            const existingModal = document.getElementById('infoModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+
+            const modal = document.createElement('div');
+            modal.id = 'infoModal';
+            modal.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.8);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                    backdrop-filter: blur(5px);
+                " onclick="closeModal()">
+                    <div style="
+                        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+                        color: #fff;
+                        padding: 2rem;
+                        border-radius: 20px;
+                        max-width: 600px;
+                        max-height: 80vh;
+                        overflow-y: auto;
+                        margin: 2rem;
+                        border: 2px solid rgba(255,107,107,0.3);
+                        box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+                    " onclick="event.stopPropagation()">
+                        <div style="
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            margin-bottom: 1.5rem;
+                            padding-bottom: 1rem;
+                            border-bottom: 2px solid rgba(255,107,107,0.3);
+                        ">
+                            <h2 style="
+                                margin: 0;
+                                background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+                                -webkit-background-clip: text;
+                                -webkit-text-fill-color: transparent;
+                                background-clip: text;
+                            ">${title}</h2>
+                            <button onclick="closeModal()" style="
+                                background: none;
+                                border: none;
+                                color: #fff;
+                                font-size: 1.5rem;
+                                cursor: pointer;
+                                padding: 0.5rem;
+                                border-radius: 50%;
+                                width: 40px;
+                                height: 40px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                transition: all 0.3s ease;
+                            " onmouseover="this.style.background='rgba(255,107,107,0.2)'" onmouseout="this.style.background='none'">×</button>
+                        </div>
+                        <div>${content}</div>
+                        <div style="text-align: center; margin-top: 2rem;">
+                            <button onclick="closeModal()" style="
+                                background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+                                color: #fff;
+                                border: none;
+                                padding: 0.8rem 2rem;
+                                border-radius: 25px;
+                                cursor: pointer;
+                                font-size: 1rem;
+                                transition: all 0.3s ease;
+                            " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">Close</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('infoModal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        // Add products function (for future expansion)
+        function addProduct(category, product) {
+            const productHTML = `
+                <div class="product-card">
+                    <div class="product-image">${product.icon}</div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.title}</h3>
+                        <div class="product-price">${product.price}</div>
+                        <div class="product-rating">${product.rating}</div>
+                        <p class="product-description">${product.description}</p>
+                        <button class="buy-button" onclick="buyProduct('${product.title}')">Buy on Amazon</button>
+                    </div>
+                </div>
+            `;
+            
+            const categorySection = document.getElementById(category);
+            const productScroll = categorySection.querySelector('.product-scroll');
+            productScroll.insertAdjacentHTML('beforeend', productHTML);
+        }
+    </script>
+</body>
+</html>
