@@ -657,27 +657,27 @@
                         <div class="product-price">$4,300</div>
                         <div class="product-rating">⭐⭐⭐⭐⭐ (4.3)</div>
                         <p class="product-description">Beautiful, Resistant Watch Strap Made of: Plasma high-tech ceramic, Titanium, Ceramos</p>
-                        <button class="buy-button">Buy on Amazon</button>
+                      <a href="https://amzn.to/44QCbT5"> <button class="buy-button">Buy on Amazon</button></a> 
                     </div>
                 </div>
                 <div class="product-card">
                     <div class="product-image"><img src="https://m.media-amazon.com/images/I/81J44XW1ZRL._AC_SX466_.jpg" alt=""></div>
                     <div class="product-info">
-                        <h3 class="product-title">Citizen Eco-Drive Pilot Chronograph Watch with Atomic Timekeeping, 12/24HR, Power Reserve, Luminous Hands/Markers, Sapphire Crystal - Green Dial</h3>
-                        <div class="product-price">$499</div>
+                        <h3 class="product-title">Rado -Captain Cook-Mens-Swiss Automatic Watch-High Tech Ceramic-Sapphire Crystal -43mm</h3>
+                        <div class="product-price">$6,200</div>
                         <div class="product-rating">⭐⭐⭐⭐⭐ (4.5)</div>
-                        <p class="product-description">Modern, pilot-inspired Promaster timepieces equipped for professional use to discover the world from high above.</p>
-                        <button class="buy-button" onclick="buyProduct('Omega Speedmaster')">Buy on Amazon</button>
+                        <p class="product-description">Captain Cook High-Tech Ceramic Automatic Chronograph - R32189313</p>
+                       <a href="https://amzn.to/46pfOVX"><button class="buy-button" >Buy on Amazon</button></a> 
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-image"><img src="https://m.media-amazon.com/images/I/71l2pSLyWRL._AC_SX466_.jpg" alt=""></div>
+                    <div class="product-image"><img src="https://m.media-amazon.com/images/I/719wk-G2PZL._AC_SX466_.jpg" alt=""></div>
                     <div class="product-info">
-                        <h3 class="product-title">Apple Watch Ultra 2</h3>
-                        <div class="product-price">$779</div>
+                        <h3 class="product-title">Citizen Men's Automatic Tsuyosa Sport Luxury Watch, Silver-Tone Stainless Steel Bracelet and Case, 3 Hand and Date, 42 Hour Power Reserve</h3>
+                        <div class="product-price">$356</div>
                         <div class="product-rating">⭐⭐⭐⭐⭐ (4.7)</div>
-                        <p class="product-description">THE FREEDOM OF CELLULAR — With a cellular service plan you can call and text without your iPhone nearby.* Stream your favorite music and podcasts. Get directions with Maps.</p>
-                        <button class="buy-button" onclick="buyProduct('TAG Heuer Formula 1')">Buy on Amazon</button>
+                        <p class="product-description">50M Water Resistant and 5 Year Limited Warrant</p>
+                  <a href="https://amzn.to/4fahfdg"> <button class="buy-button">Buy on Amazon</button></a>     
                     </div>
                 </div>
             </div>
@@ -1019,14 +1019,6 @@
             window.open('https://amzn.to/3UjyWO1', '_blank');
         }
 
-        // Buy Product function (simulates affiliate link)
-        function buyProduct(productName) {
-            // In a real implementation, this would redirect to your Amazon affiliate link
-            alert(`Redirecting to Amazon for: ${productName}\n\nIn production, this would be your affiliate link!`);
-            
-            // Example of how you'd implement the actual redirect:
-            // window.open('https://amazon.com/dp/YOUR-AFFILIATE-LINK', '_blank');
-        }
 
         // Footer functionality
         function showShippingInfo() {
@@ -1352,7 +1344,7 @@
                         <div class="product-price">${product.price}</div>
                         <div class="product-rating">${product.rating}</div>
                         <p class="product-description">${product.description}</p>
-                        <button class="buy-button" onclick="buyProduct('${product.title}')">Buy on Amazon</button>
+                        <button class="buy-button">Buy on Amazon</button>
                     </div>
                 </div>
             `;
