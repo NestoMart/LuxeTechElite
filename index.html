@@ -268,13 +268,14 @@
             background-clip: text;
         }
 
-        /* Product Grid */
+        /* Product Grid - Fixed for proper side scrolling */
         .product-scroll {
             display: flex;
             gap: 2rem;
             overflow-x: auto;
-            padding: 1rem 0;
+            padding: 1rem 0 2rem 0;
             scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
         }
 
         .product-scroll::-webkit-scrollbar {
@@ -292,7 +293,9 @@
         }
 
         .product-card {
-            min-width: 300px;
+            min-width: 320px;
+            max-width: 320px;
+            flex-shrink: 0;
             background: #fff;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -309,7 +312,6 @@
         .product-image {
             width: 100%;
             height: 250px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -317,6 +319,16 @@
             font-size: 3rem;
             position: relative;
             overflow: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
         .product-image::before {
@@ -329,6 +341,7 @@
             background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
             transform: rotate(45deg);
             animation: shimmer 3s infinite;
+            z-index: 1;
         }
 
         .product-info {
@@ -336,10 +349,16 @@
         }
 
         .product-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
             margin-bottom: 0.5rem;
             color: #333;
+            line-height: 1.3;
+            height: 2.6rem;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
         }
 
         .product-price {
@@ -352,12 +371,19 @@
         .product-rating {
             color: #ffd700;
             margin-bottom: 1rem;
+            font-size: 0.9rem;
         }
 
         .product-description {
             color: #666;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             margin-bottom: 1rem;
+            line-height: 1.4;
+            height: 3.4rem;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
         }
 
         .buy-button {
@@ -370,6 +396,9 @@
             cursor: pointer;
             transition: all 0.3s ease;
             font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
         }
 
         .buy-button:hover {
@@ -515,6 +544,7 @@
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
         }
+        
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -537,7 +567,12 @@
             }
 
             .product-card {
-                min-width: 250px;
+                min-width: 280px;
+                max-width: 280px;
+            }
+
+            .product-scroll {
+                gap: 1rem;
             }
         }
 
@@ -621,7 +656,7 @@
         </div>
     </section>
 
-            <!-- Main Content -->
+    <!-- Main Content -->
     <div class="main-content">
         <!-- Categories Section -->
         <section class="section" id="categories">
@@ -651,46 +686,55 @@
             <h2>⌚ Luxury Watches</h2>
             <div class="product-scroll">
                 <div class="product-card">
-                    <div class="product-image"><img src="https://m.media-amazon.com/images/I/71nsOv4pzQS._AC_SY445_.jpg" alt=""></div>
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/71nsOv4pzQS._AC_SY445_.jpg" alt="Rado Blue Watch">
+                    </div>
                     <div class="product-info">
-                        <h3 class="product-title">Rado Blue Watch Captain Cook High Tech Ceramic Automatic Swiss Movement, 43 mm. R32128202</h3>
+                        <h3 class="product-title">Rado Blue Watch Captain Cook High Tech Ceramic Automatic Swiss Movement, 43 mm</h3>
                         <div class="product-price">$4,300</div>
                         <div class="product-rating">⭐⭐⭐⭐⭐ (4.3)</div>
                         <p class="product-description">Beautiful, Resistant Watch Strap Made of: Plasma high-tech ceramic, Titanium, Ceramos</p>
-                      <a href="https://amzn.to/44QCbT5"> <button class="buy-button">Buy on Amazon</button></a> 
+                        <a href="https://amzn.to/44QCbT5" class="buy-button">Buy on Amazon</a>
                     </div>
                 </div>
+                
                 <div class="product-card">
-                    <div class="product-image"><img src="https://m.media-amazon.com/images/I/81J44XW1ZRL._AC_SX466_.jpg" alt=""></div>
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/81J44XW1ZRL._AC_SX466_.jpg" alt="Rado Captain Cook">
+                    </div>
                     <div class="product-info">
-                        <h3 class="product-title">Rado -Captain Cook-Mens-Swiss Automatic Watch-High Tech Ceramic-Sapphire Crystal -43mm</h3>
+                        <h3 class="product-title">Rado Captain Cook Swiss Automatic Watch High Tech Ceramic Sapphire Crystal 43mm</h3>
                         <div class="product-price">$6,200</div>
                         <div class="product-rating">⭐⭐⭐⭐⭐ (4.5)</div>
                         <p class="product-description">Captain Cook High-Tech Ceramic Automatic Chronograph - R32189313</p>
-                       <a href="https://amzn.to/46pfOVX"><button class="buy-button" >Buy on Amazon</button></a> 
+                        <a href="https://amzn.to/46pfOVX" class="buy-button">Buy on Amazon</a>
                     </div>
                 </div>
+                
                 <div class="product-card">
-                    <div class="product-image"><img src="https://m.media-amazon.com/images/I/719wk-G2PZL._AC_SX466_.jpg" alt=""></div>
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/719wk-G2PZL._AC_SX466_.jpg" alt="Citizen Tsuyosa Sport">
+                    </div>
                     <div class="product-info">
-                        <h3 class="product-title">Citizen Men's Automatic Tsuyosa Sport Luxury Watch, Silver-Tone Stainless Steel Bracelet and Case, 3 Hand and Date, 42 Hour Power Reserve</h3>
+                        <h3 class="product-title">Citizen Men's Automatic Tsuyosa Sport Luxury Watch Silver-Tone Stainless Steel</h3>
                         <div class="product-price">$356</div>
                         <div class="product-rating">⭐⭐⭐⭐⭐ (4.7)</div>
-                        <p class="product-description">50M Water Resistant and 5 Year Limited Warrant</p>
-                  <a href="https://amzn.to/4fahfdg"> <button class="buy-button">Buy on Amazon</button></a>     
-                  
+                        <p class="product-description">50M Water Resistant and 5 Year Limited Warranty</p>
+                        <a href="https://amzn.to/4fahfdg" class="buy-button">Buy on Amazon</a>
                     </div>
-                                   <div class="product-card">
-                    <div class="product-image"><img src="https://m.media-amazon.com/images/I/81sFEqTI9jL._AC_SX385_.jpg" alt=""></div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://m.media-amazon.com/images/I/81sFEqTI9jL._AC_SX385_.jpg" alt="OUPINKE Tourbillon Watch">
+                    </div>
                     <div class="product-info">
-                        <h3 class="product-title">OUPINKE Men's Watch Automatic Designer Big Face Luxury Mechanical Skeleton Dress Business Wrist Watches Two Tone Tungsten Steel Waterproof Sapphire Calendar</h3>
+                        <h3 class="product-title">OUPINKE Men's Watch Automatic Designer Big Face Luxury Mechanical Skeleton</h3>
                         <div class="product-price">$1,688</div>
                         <div class="product-rating">⭐⭐⭐⭐⭐ (4.4)</div>
-                        <p class="product-description">👍True Tourbillon Watch: The pinnacle of mechanical manufacturing, the True Tourbillon Watch has a hollow tourbillon device on the dial. You can see the operation of the mechanical gears and feel the beauty of pure mechanical design</p>
-                  <a href="https://amzn.to/40BXAgj"> <button class="buy-button">Buy on Amazon</button></a>     
-                  
+                        <p class="product-description">True Tourbillon Watch: The pinnacle of mechanical manufacturing with hollow tourbillon device</p>
+                        <a href="https://amzn.to/40BXAgj" class="buy-button">Buy on Amazon</a>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -1031,6 +1075,10 @@
             window.open('https://amzn.to/3UjyWO1', '_blank');
         }
 
+        // Buy product function
+        function buyProduct(productName) {
+            alert('Redirecting to Amazon for: ' + productName);
+        }
 
         // Footer functionality
         function showShippingInfo() {
@@ -1320,7 +1368,7 @@
                                 transition: all 0.3s ease;
                             " onmouseover="this.style.background='rgba(255,107,107,0.2)'" onmouseout="this.style.background='none'">×</button>
                         </div>
-                        <div>${content}</div>
+                          <div>${content}</div>
                         <div style="text-align: center; margin-top: 2rem;">
                             <button onclick="closeModal()" style="
                                 background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
